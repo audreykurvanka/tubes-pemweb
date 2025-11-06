@@ -10,6 +10,9 @@
 </head>
 
 <body>
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  
   <!-- Sidebar -->
   <button class="mobile-menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
   <aside class="sidebar" id="sidebar">
@@ -23,6 +26,8 @@
       <a href="history.html" class="nav-item"><i class="fas fa-history"></i>Riwayat</a>
       <a href="feedback.html" class="nav-item"><i class="fas fa-comment-dots"></i>Feedback</a>
       <a href="profile.html" class="nav-item active"><i class="fas fa-user-circle"></i>Profil</a>
+      <div class="sidebar-divider"></div>
+      <a href="index.html" class="nav-item"><i class="fas fa-sign-out-alt"></i>Keluar</a>
     </nav>
   </aside>
 
@@ -37,10 +42,10 @@
       <div class="top-bar-right">
         <div class="notification-bell"><i class="fas fa-bell"></i><div class="notification-badge">2</div></div>
         <div class="user-profile">
-          <img src="https://ui-avatars.com/api/?name=Audrey&background=3E6985&color=fff" alt="User">
+          <img id="userAvatarTop" src="https://ui-avatars.com/api/?name=User&background=3E6985&color=fff" alt="User">
           <div class="user-info">
-            <span class="user-name">Audrey Kurvanka</span>
-            <span class="user-role">Admin</span>
+            <span class="user-name" id="displayUserNameTop">User</span>
+            <span class="user-role" id="displayUserRoleTop">Admin</span>
           </div>
         </div>
       </div>
@@ -52,28 +57,30 @@
         <h4 class="card-title"><i class="fas fa-id-card me-2 text-teal"></i>Informasi Akun</h4>
 
         <div class="text-center mb-4">
-          <img src="https://ui-avatars.com/api/?name=Audrey+Kurvanka&background=3E6985&color=fff" alt="Profile" class="rounded-circle mb-3" width="120">
-          <h5 class="mb-0">Audrey Kurvanka</h5>
-          <small class="text-muted">Admin Aqua-VIE</small>
+          <img id="userAvatarLarge" src="https://ui-avatars.com/api/?name=User&background=3E6985&color=fff" alt="Profile" class="rounded-circle mb-3" width="120">
+          <h5 class="mb-0" id="displayUserName">User</h5>
+          <small class="text-muted" id="displayUserRole">Admin Aqua-VIE</small>
         </div>
 
         <form id="profileForm">
           <div class="row g-3">
             <div class="col-md-6">
               <label class="form-label fw-semibold text-dark">Nama Lengkap</label>
-              <input type="text" class="form-control form-control-lg" value="Audrey Kurvanka">
+              <input type="text" id="profileName" class="form-control form-control-lg" value="">
             </div>
             <div class="col-md-6">
               <label class="form-label fw-semibold text-dark">Email</label>
-              <input type="email" class="form-control form-control-lg" value="audrey@example.com">
+              <input type="email" id="profileEmail" class="form-control form-control-lg" value="">
             </div>
             <div class="col-md-6">
               <label class="form-label fw-semibold text-dark">Kata Sandi Baru</label>
-              <input type="password" class="form-control form-control-lg" placeholder="Masukkan kata sandi baru">
+              <input type="password" id="newPassword" class="form-control form-control-lg" placeholder="Masukkan kata sandi baru">
+              <small id="newPasswordError" class="text-danger" style="display: none;">Kata sandi minimal 8 karakter</small>
             </div>
             <div class="col-md-6">
               <label class="form-label fw-semibold text-dark">Konfirmasi Kata Sandi</label>
-              <input type="password" class="form-control form-control-lg" placeholder="Ulangi kata sandi baru">
+              <input type="password" id="confirmPassword" class="form-control form-control-lg" placeholder="Ulangi kata sandi baru">
+              <small id="confirmPasswordError" class="text-danger" style="display: none;">Kata sandi tidak cocok</small>
             </div>
           </div>
 
@@ -81,6 +88,9 @@
             <button type="submit" class="btn-login"><i class="fas fa-save me-2"></i>Simpan Perubahan</button>
             <button type="button" class="btn-secondary" onclick="window.location.href='dashboard.html'">
               <i class="fas fa-arrow-left me-2"></i>Kembali ke Dashboard
+            </button>
+            <button type="button" class="btn-danger" onclick="handleLogout()">
+              <i class="fas fa-sign-out-alt me-2"></i>Keluar (Logout)
             </button>
           </div>
         </form>
@@ -90,6 +100,109 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/script.js"></script>
+  <script>
+    // Load user data
+    window.addEventListener('DOMContentLoaded', function() {
+      const userName = localStorage.getItem('userName') || 'User';
+      const userRole = localStorage.getItem('userRole') || 'Admin';
+      const userEmail = localStorage.getItem('userEmail') || 'user@example.com';
+      
+      // Update all displays
+      document.getElementById('displayUserName').textContent = userName;
+      document.getElementById('displayUserRole').textContent = userRole + ' Aqua-VIE';
+      document.getElementById('displayUserNameTop').textContent = userName;
+      document.getElementById('displayUserRoleTop').textContent = userRole;
+      
+      const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3E6985&color=fff`;
+      document.getElementById('userAvatarTop').src = avatarUrl;
+      document.getElementById('userAvatarLarge').src = avatarUrl;
+      
+      // Pre-fill form
+      document.getElementById('profileName').value = userName;
+      document.getElementById('profileEmail').value = userEmail;
+    });
+    
+    // Form submission
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('profileName').value;
+      const email = document.getElementById('profileEmail').value;
+      const newPassword = document.getElementById('newPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      
+      const newPasswordError = document.getElementById('newPasswordError');
+      const confirmPasswordError = document.getElementById('confirmPasswordError');
+      
+      let isValid = true;
+      
+      // Validate password if entered
+      if (newPassword) {
+        if (newPassword.length < 8) {
+          newPasswordError.style.display = 'block';
+          document.getElementById('newPassword').classList.add('is-invalid');
+          isValid = false;
+        } else {
+          newPasswordError.style.display = 'none';
+          document.getElementById('newPassword').classList.remove('is-invalid');
+        }
+        
+        if (newPassword !== confirmPassword) {
+          confirmPasswordError.style.display = 'block';
+          document.getElementById('confirmPassword').classList.add('is-invalid');
+          isValid = false;
+        } else {
+          confirmPasswordError.style.display = 'none';
+          document.getElementById('confirmPassword').classList.remove('is-invalid');
+        }
+      }
+      
+      if (!isValid) return;
+      
+      // Update localStorage
+      localStorage.setItem('userName', name);
+      localStorage.setItem('userEmail', email);
+      
+      alert('Profil berhasil diperbarui!');
+      window.location.reload();
+    });
+    
+    // Logout function
+    function handleLogout() {
+      if (confirm('Apakah Anda yakin ingin keluar?')) {
+        localStorage.clear();
+        window.location.href = 'index.html';
+      }
+    }
+    
+    // Mobile menu toggle
+    document.getElementById('menuToggle')?.addEventListener('click', function() {
+      document.getElementById('sidebar').classList.toggle('show');
+    });
+    
+    // Sidebar toggle functionality
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.querySelector('.main-content');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    
+    menuToggle.addEventListener('click', function() {
+      sidebar.classList.toggle('collapsed');
+      mainContent.classList.toggle('expanded');
+      menuToggle.classList.toggle('shifted');
+      
+      // Show overlay on mobile
+      if (window.innerWidth <= 992) {
+        sidebar.classList.toggle('show');
+        sidebarOverlay.classList.toggle('show');
+      }
+    });
+    
+    // Close sidebar when clicking overlay
+    sidebarOverlay.addEventListener('click', function() {
+      sidebar.classList.remove('show');
+      sidebarOverlay.classList.remove('show');
+    });
+  </script>
 </body>
 </html>
