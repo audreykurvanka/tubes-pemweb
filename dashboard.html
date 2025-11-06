@@ -10,6 +10,9 @@
   </head>
 
   <body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
     <!-- Sidebar -->
     <button class="mobile-menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
     <aside class="sidebar" id="sidebar">
@@ -23,6 +26,8 @@
         <a href="history.html" class="nav-item"><i class="fas fa-history"></i>Riwayat</a>
         <a href="feedback.html" class="nav-item"><i class="fas fa-comment-dots"></i>Feedback</a>
         <a href="profile.html" class="nav-item"><i class="fas fa-user-circle"></i>Profil</a>
+        <div class="sidebar-divider"></div>
+        <a href="logout.html" class="nav-item"><i class="fas fa-sign-out-alt"></i>Keluar</a>
       </nav>
     </aside>
 
@@ -40,10 +45,10 @@
             <div class="notification-badge">3</div>
           </div>
           <div class="user-profile" id="profileBtn">
-            <img src="https://ui-avatars.com/api/?name=Audrey&background=3E6985&color=fff" alt="User" />
+            <img id="userAvatar" src="https://ui-avatars.com/api/?name=User&background=3E6985&color=fff" alt="User" />
             <div class="user-info">
-              <span class="user-name">Audrey Kurvanka</span>
-              <span class="user-role">Admin</span>
+              <span class="user-name" id="displayUserName">User</span>
+              <span class="user-role" id="displayUserRole">Admin</span>
             </div>
           </div>
         </div>
@@ -54,7 +59,7 @@
         <!-- Welcome -->
         <div class="welcome-card mb-4">
           <div class="welcome-content">
-            <h2>Selamat Datang, Audrey! 👋</h2>
+            <h2>Selamat Datang, <span id="welcomeUserName">User</span>! 👋</h2>
             <p><strong>Aqua-VIE (Aqua-Village Integrated Environment)</strong> merupakan platform pemantauan kualitas air berbasis digital yang dirancang<br>untuk membantu pembudidaya ikan menjaga keseimbangan ekosistem tambak. Sistem ini
             menganalisis data pH, suhu, TDS, dan EC untuk<br>memberikan wawasan kondisi air secara real-time.</p>
           </div>
@@ -66,47 +71,47 @@
         <!-- Stats -->
         <div class="row g-4 mb-4">
           <div class="col-md-3">
-            <div class="stat-card stat-card-animated">
+            <div class="stat-card stat-card-animated" id="phCard">
               <div class="stat-icon bg-blue"><i class="fas fa-flask"></i></div>
               <div class="stat-info">
-                <h3>7.2</h3>
+                <h3 id="phValue">7.2</h3>
                 <span class="unit">pH</span>
               </div>
-              <p>Stabil dalam batas ideal</p>
-              <div class="stat-progress"><div class="progress-bar" style="width: 80%"></div></div>
+              <p id="phStatus">Stabil dalam batas ideal</p>
+              <div class="stat-progress" id="phProgress"><div class="progress-bar" style="width: 80%"></div></div>
             </div>
           </div>
           <div class="col-md-3">
-            <div class="stat-card stat-card-animated">
+            <div class="stat-card stat-card-animated" id="tempCard">
               <div class="stat-icon bg-orange"><i class="fas fa-temperature-high"></i></div>
               <div class="stat-info">
-                <h3>28</h3>
+                <h3 id="tempValue">28</h3>
                 <span class="unit">°C</span>
               </div>
-              <p>Suhu optimal</p>
-              <div class="stat-progress"><div class="progress-bar" style="width: 70%"></div></div>
+              <p id="tempStatus">Suhu optimal</p>
+              <div class="stat-progress" id="tempProgress"><div class="progress-bar" style="width: 70%"></div></div>
             </div>
           </div>
           <div class="col-md-3">
-            <div class="stat-card stat-card-animated">
+            <div class="stat-card stat-card-animated" id="tdsCard">
               <div class="stat-icon bg-green"><i class="fas fa-tint"></i></div>
               <div class="stat-info">
-                <h3>350</h3>
+                <h3 id="tdsValue">350</h3>
                 <span class="unit">ppm</span>
               </div>
-              <p>Konsentrasi TDS baik</p>
-              <div class="stat-progress"><div class="progress-bar" style="width: 60%"></div></div>
+              <p id="tdsStatus">Konsentrasi TDS baik</p>
+              <div class="stat-progress" id="tdsProgress"><div class="progress-bar" style="width: 60%"></div></div>
             </div>
           </div>
           <div class="col-md-3">
-            <div class="stat-card stat-card-animated">
+            <div class="stat-card stat-card-animated" id="ecCard">
               <div class="stat-icon bg-purple"><i class="fas fa-bolt"></i></div>
               <div class="stat-info">
-                <h3>500</h3>
+                <h3 id="ecValue">500</h3>
                 <span class="unit">µS/cm</span>
               </div>
-              <p>Kandungan EC aman</p>
-              <div class="stat-progress"><div class="progress-bar" style="width: 65%"></div></div>
+              <p id="ecStatus">Kandungan EC aman</p>
+              <div class="stat-progress" id="ecProgress"><div class="progress-bar" style="width: 65%"></div></div>
             </div>
           </div>
         </div>
@@ -120,12 +125,195 @@
               <button class="filter-btn">Bulanan</button>
             </div>
           </div>
-          <canvas id="qualityChart" height="120"></canvas>
+          <div style="height: 300px;">
+            <canvas id="qualityChart"></canvas>
+          </div>
         </div>
+      </section>
+    </main>
        
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/script.js"></script>
+    <script>
+      // Load user data from localStorage
+      window.addEventListener('DOMContentLoaded', function() {
+        const userName = localStorage.getItem('userName') || 'User';
+        const userRole = localStorage.getItem('userRole') || 'Admin';
+        const userEmail = localStorage.getItem('userEmail') || 'user@example.com';
+        
+        // Update display
+        document.getElementById('welcomeUserName').textContent = userName;
+        document.getElementById('displayUserName').textContent = userName;
+        document.getElementById('displayUserRole').textContent = userRole;
+        document.getElementById('userAvatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=3E6985&color=fff`;
+        
+        // Load latest data from localStorage if available
+        const latestData = JSON.parse(localStorage.getItem('latestWaterData') || 'null');
+        if (latestData) {
+          updateDashboard(latestData);
+        }
+      });
+      
+      function updateDashboard(data) {
+        // Update pH
+        document.getElementById('phValue').textContent = data.ph;
+        updateParameterStatus('ph', data.ph, 6.5, 8.5);
+        
+        // Update Temperature
+        document.getElementById('tempValue').textContent = data.temperature;
+        updateParameterStatus('temp', data.temperature, 25, 32);
+        
+        // Update TDS
+        document.getElementById('tdsValue').textContent = data.tds;
+        updateParameterStatus('tds', data.tds, 300, 500);
+        
+        // Update EC
+        document.getElementById('ecValue').textContent = data.ec;
+        updateParameterStatus('ec', data.ec, 400, 700);
+      }
+      
+      function updateParameterStatus(type, value, min, max) {
+        const statusEl = document.getElementById(`${type}Status`);
+        const progressEl = document.getElementById(`${type}Progress`);
+        const progressBar = progressEl.querySelector('.progress-bar');
+        
+        // Remove existing classes
+        progressEl.classList.remove('warning', 'danger');
+        
+        let percentage = ((value - min) / (max - min)) * 100;
+        percentage = Math.max(0, Math.min(100, percentage));
+        
+        if (value < min) {
+          statusEl.textContent = 'Di bawah batas ideal';
+          progressEl.classList.add('warning');
+          progressBar.style.width = '30%';
+        } else if (value > max) {
+          statusEl.textContent = 'Melebihi batas ideal';
+          progressEl.classList.add('danger');
+          progressBar.style.width = '100%';
+        } else {
+          const messages = {
+            ph: 'Stabil dalam batas ideal',
+            temp: 'Suhu optimal',
+            tds: 'Konsentrasi TDS baik',
+            ec: 'Kandungan EC aman'
+          };
+          statusEl.textContent = messages[type];
+          progressBar.style.width = percentage + '%';
+        }
+      }
+      
+      // Chart initialization
+      const ctx = document.getElementById('qualityChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
+          datasets: [{
+            label: 'pH',
+            data: [7.0, 7.2, 7.1, 7.3, 7.2, 7.4, 7.2],
+            borderColor: '#4A90E2',
+            backgroundColor: 'rgba(74, 144, 226, 0.1)',
+            tension: 0.4,
+            borderWidth: 2,
+            pointRadius: 3,
+            pointHoverRadius: 5
+          }, {
+            label: 'Suhu (°C)',
+            data: [27, 28, 27.5, 29, 28, 28.5, 28],
+            borderColor: '#FF9F43',
+            backgroundColor: 'rgba(255, 159, 67, 0.1)',
+            tension: 0.4,
+            borderWidth: 2,
+            pointRadius: 3,
+            pointHoverRadius: 5
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          aspectRatio: 2.5,
+          interaction: {
+            mode: 'index',
+            intersect: false,
+          },
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: {
+                usePointStyle: true,
+                padding: 15,
+                font: {
+                  size: 12
+                }
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              padding: 12,
+              titleFont: {
+                size: 13
+              },
+              bodyFont: {
+                size: 12
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: false,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              },
+              ticks: {
+                font: {
+                  size: 11
+                }
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                font: {
+                  size: 11
+                }
+              }
+            }
+          }
+        }
+      });
+      
+      // Mobile menu toggle
+      document.getElementById('menuToggle')?.addEventListener('click', function() {
+        document.getElementById('sidebar').classList.toggle('show');
+      });
+      
+      // Sidebar toggle functionality
+      const menuToggle = document.getElementById('menuToggle');
+      const sidebar = document.getElementById('sidebar');
+      const mainContent = document.querySelector('.main-content');
+      const sidebarOverlay = document.getElementById('sidebarOverlay');
+      
+      menuToggle.addEventListener('click', function() {
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
+        menuToggle.classList.toggle('shifted');
+        
+        // Show overlay on mobile
+        if (window.innerWidth <= 992) {
+          sidebar.classList.toggle('show');
+          sidebarOverlay.classList.toggle('show');
+        }
+      });
+      
+      // Close sidebar when clicking overlay
+      sidebarOverlay.addEventListener('click', function() {
+        sidebar.classList.remove('show');
+        sidebarOverlay.classList.remove('show');
+      });
+    </script>
   </body>
 </html>
