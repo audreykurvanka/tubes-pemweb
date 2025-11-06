@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback | Aqua-VIE</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <button class="mobile-menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+  <aside class="sidebar" id="sidebar">
+    <div class="logo-sidebar">
+      <i class="fas fa-water"></i>
+      <span>Aqua-VIE</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-item"><i class="fas fa-home"></i>Dashboard</a>
+      <a href="input.html" class="nav-item"><i class="fas fa-plus-circle"></i>Input Data</a>
+      <a href="history.html" class="nav-item"><i class="fas fa-history"></i>Riwayat</a>
+      <a href="feedback.html" class="nav-item active"><i class="fas fa-comment-dots"></i>Feedback</a>
+      <a href="profile.html" class="nav-item"><i class="fas fa-user-circle"></i>Profil</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <h2>Feedback</h2>
+        <p>Sampaikan saran dan masukan Anda untuk pengembangan Aqua-VIE</p>
+      </div>
+      <div class="top-bar-right">
+        <div class="notification-bell"><i class="fas fa-bell"></i><div class="notification-badge">2</div></div>
+        <div class="user-profile">
+          <img src="https://ui-avatars.com/api/?name=Audrey&background=3E6985&color=fff" alt="User">
+          <div class="user-info">
+            <span class="user-name">Audrey Kurvanka</span>
+            <span class="user-role">Admin</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <section class="content-area">
+      <div class="card-box">
+        <h4 class="card-title"><i class="fas fa-envelope-open-text me-2 text-teal"></i>Form Feedback</h4>
+
+        <form id="feedbackForm">
+          <div class="mb-4">
+            <label class="form-label fw-semibold text-dark">Nama</label>
+            <input type="text" class="form-control form-control-lg" placeholder="Nama Anda" required>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold text-dark">Email</label>
+            <input type="email" class="form-control form-control-lg" placeholder="Email aktif Anda" required>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold text-dark">Jenis Pesan</label>
+            <select class="form-control form-control-lg" required>
+              <option value="">Pilih jenis pesan</option>
+              <option>Saran Pengembangan</option>
+              <option>Masalah Teknis</option>
+              <option>Permintaan Fitur</option>
+              <option>Lainnya</option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold text-dark">Pesan Anda</label>
+            <textarea class="form-control form-control-lg" rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>
+          </div>
+
+          <div class="form-actions d-grid gap-2">
+            <button type="submit" class="btn-login w-100"><i class="fas fa-paper-plane me-2"></i>Kirim Feedback</button>
+            <button type="button" class="btn-secondary w-100" onclick="window.location.href='dashboard.html'">
+              <i class="fas fa-arrow-left me-2"></i>Kembali ke Dashboard
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

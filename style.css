@@ -1,0 +1,1676 @@
+
+        :root {
+            --yankees-blue: #0D273D;
+            --teal-blue: #3E6985;
+            --pewter-blue: #8AA7BC;
+            --pastel-blue: #A6BED1;
+            --columbia-blue: #CDD7DF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--columbia-blue) 0%, var(--pastel-blue) 100%);
+            overflow-x: hidden;
+        }
+
+        /* Login Page */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .floating-circles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(62, 105, 133, 0.15);
+            animation: float 25s infinite ease-in-out;
+        }
+
+        .circle:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            left: -100px;
+        }
+
+        .circle:nth-child(2) {
+            width: 250px;
+            height: 250px;
+            top: 50%;
+            right: -50px;
+            animation-delay: 3s;
+        }
+
+        .circle:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            bottom: -80px;
+            left: 20%;
+            animation-delay: 6s;
+        }
+
+        .circle:nth-child(4) {
+            width: 150px;
+            height: 150px;
+            top: 20%;
+            right: 25%;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+                opacity: 0.3;
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1) rotate(120deg);
+                opacity: 0.6;
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.95) rotate(240deg);
+                opacity: 0.4;
+            }
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 25px 80px rgba(13, 39, 61, 0.3);
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .water-animation {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .water-animation i {
+            font-size: 3.5rem;
+            color: var(--teal-blue);
+            position: relative;
+            z-index: 2;
+            animation: waterDrop 2s ease-in-out infinite;
+        }
+
+        @keyframes waterDrop {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(62, 105, 133, 0.2);
+            animation: waveExpand 2s ease-out infinite;
+        }
+
+        .wave:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes waveExpand {
+            0% {
+                transform: translateX(-50%) scale(0.5);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateX(-50%) scale(2);
+                opacity: 0;
+            }
+        }
+
+        .logo-section h2 {
+            color: var(--yankees-blue);
+            font-weight: bold;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-section p {
+            color: var(--teal-blue);
+            font-size: 0.95rem;
+        }
+
+        .input-group-custom {
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--teal-blue);
+            z-index: 10;
+            font-size: 1.1rem;
+        }
+
+        .input-icon-right {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--teal-blue);
+            z-index: 10;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .input-icon-right:hover {
+            color: var(--yankees-blue);
+        }
+
+        .form-control {
+            padding-left: 50px;
+            padding-right: 50px;
+            border: 2px solid var(--columbia-blue);
+            border-radius: 12px;
+            height: 55px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--teal-blue);
+            box-shadow: 0 0 0 0.25rem rgba(62, 105, 133, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .form-select {
+            border: 2px solid var(--columbia-blue);
+            border-radius: 12px;
+            height: 55px;
+            transition: all 0.3s ease;
+            padding-left: 1rem;
+        }
+
+        .form-select:focus {
+            border-color: var(--teal-blue);
+            box-shadow: 0 0 0 0.25rem rgba(62, 105, 133, 0.15);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, var(--teal-blue), var(--yankees-blue));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            height: 55px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(62, 105, 133, 0.4);
+            color: white;
+        }
+
+        .btn-login:active {
+            transform: translateY(-1px);
+        }
+
+        .password-strength {
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .password-strength::after {
+            content: '';
+            display: block;
+            height: 100%;
+            width: var(--strength, 0);
+            background: linear-gradient(90deg, #ff4444, #ffbb33, #00C851);
+            transition: width 0.3s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .link-text {
+            color: var(--teal-blue);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .link-text:hover {
+            color: var(--yankees-blue);
+            text-decoration: underline;
+        }
+
+        /* Dashboard Layout */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--yankees-blue);
+            padding: 0;
+            z-index: 1000;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-sidebar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem;
+            color: white;
+            font-size: 1.6rem;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-sidebar i {
+            font-size: 2.2rem;
+            color: var(--teal-blue);
+            animation: waterDrop 2s ease-in-out infinite;
+        }
+
+        .sidebar-nav {
+            padding: 1.5rem 0;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2rem;
+            color: var(--columbia-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--teal-blue);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item:hover::before,
+        .nav-item.active::before {
+            transform: scaleY(1);
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(62, 105, 133, 0.2);
+            color: white;
+        }
+
+        .nav-item i {
+            width: 24px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1100;
+            background: var(--yankees-blue);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+            background: #f5f7fa;
+            transition: margin-left 0.3s ease;
+        }
+
+        .top-bar {
+            background: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-bar-left h2 {
+            color: var(--yankees-blue);
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .top-bar-left p {
+            color: var(--teal-blue);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .notification-bell {
+            position: relative;
+            width: 45px;
+            height: 45px;
+            background: var(--columbia-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .notification-bell:hover {
+            background: var(--teal-blue);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4444;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.7);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 0 10px rgba(255, 68, 68, 0);
+            }
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            padding: 0.7rem 1.2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            background: var(--columbia-blue);
+        }
+
+        .user-profile:hover {
+            background: var(--pewter-blue);
+            transform: translateY(-2px);
+        }
+
+        .user-profile img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--yankees-blue);
+            font-size: 0.95rem;
+        }
+
+        .user-role {
+            font-size: 0.8rem;
+            color: var(--teal-blue);
+        }
+
+        .notification-dropdown,
+        .profile-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+            min-width: 320px;
+            display: none;
+            animation: slideDown 0.3s ease;
+            z-index: 1001;
+        }
+
+        .notification-dropdown.show,
+        .profile-dropdown.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid var(--columbia-blue);
+        }
+
+        .notification-header h5 {
+            margin: 0;
+            color: var(--yankees-blue);
+            font-size: 1.1rem;
+        }
+
+        .mark-read {
+            color: var(--teal-blue);
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .notification-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--columbia-blue);
+            transition: all 0.3s ease;
+        }
+
+        .notification-item:hover {
+            background: var(--columbia-blue);
+        }
+
+        .notification-item.unread {
+            background: rgba(62, 105, 133, 0.05);
+        }
+
+        .notification-item i {
+            font-size: 1.5rem;
+            margin-top: 5px;
+        }
+
+        .notification-content p {
+            margin: 0 0 5px 0;
+            color: var(--yankees-blue);
+            font-size: 0.9rem;
+        }
+
+        .notification-content small {
+            color: var(--teal-blue);
+            font-size: 0.8rem;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--columbia-blue);
+        }
+
+        .profile-header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .profile-header h5 {
+            margin: 0;
+            color: var(--yankees-blue);
+        }
+
+        .profile-header small {
+            color: var(--teal-blue);
+        }
+
+        .profile-dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            color: var(--yankees-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .profile-dropdown a:hover {
+            background: var(--columbia-blue);
+        }
+
+        .content-area {
+            padding: 2rem;
+        }
+
+        /* Card Box */
+        .card-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 0.6s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card-title {
+            color: var(--yankees-blue);
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Welcome Card */
+        .welcome-card {
+            background: linear-gradient(135deg, var(--teal-blue), var(--yankees-blue));
+            color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 40px rgba(62, 105, 133, 0.3);
+            animation: slideInLeft 0.6s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .welcome-content h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-illustration i {
+            font-size: 5rem;
+            opacity: 0.3;
+            animation: swim 3s ease-in-out infinite;
+        }
+
+        @keyframes swim {
+            0%, 100% {
+                transform: translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateX(10px) rotate(-5deg);
+            }
+            75% {
+                transform: translateX(-10px) rotate(5deg);
+            }
+        }
+
+        /* Stat Cards */
+        .stat-card {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal-blue), var(--yankees-blue));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-card-animated {
+            animation: fadeInUp 0.6s ease;
+            animation-fill-mode: backwards;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover .stat-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .bg-blue { background: linear-gradient(135deg, #4A90E2, #357ABD); }
+        .bg-orange { background: linear-gradient(135deg, #FF9F43, #F76B1C); }
+        .bg-green { background: linear-gradient(135deg, #2ECC71, #27AE60); }
+        .bg-purple { background: linear-gradient(135deg, #9B59B6, #8E44AD); }
+
+        .stat-info {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .stat-info h3 {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--yankees-blue);
+            margin: 0;
+        }
+
+        .stat-info .unit {
+            font-size: 1rem;
+            color: var(--teal-blue);
+            font-weight: normal;
+        }
+
+        .stat-info p {
+            margin: 0;
+            color: var(--teal-blue);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .stat-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.85rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .stat-change.positive {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .stat-change.negative {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .stat-change.neutral {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        .stat-progress {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--teal-blue), var(--yankees-blue));
+            border-radius: 3px;
+            transition: width 1s ease;
+        }
+
+        .chart-filters {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.2rem;
+            border: 2px solid var(--columbia-blue);
+            background: white;
+            border-radius: 8px;
+            color: var(--teal-blue);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--teal-blue);
+            color: white;
+            border-color: var(--teal-blue);
+        }
+
+        .card-header-custom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Status List */
+        .status-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--columbia-blue);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .status-item:hover {
+            background: var(--pewter-blue);
+            transform: translateX(5px);
+        }
+
+        .status-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: white;
+        }
+
+        .status-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .status-label {
+            font-size: 0.9rem;
+            color: var(--teal-blue);
+        }
+
+        .status-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--yankees-blue);
+        }
+
+        .status-badge {
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .badge-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .badge-info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .last-update {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--columbia-blue);
+            color: var(--teal-blue);
+            font-size: 0.9rem;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .action-btn {
+            padding: 2rem 1.5rem;
+            background: linear-gradient(135deg, var(--pastel-blue), white);
+            border: 2px solid transparent;
+            border-radius: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            color: var(--yankees-blue);
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(62, 105, 133, 0.2);
+            border-color: var(--teal-blue);
+            background: white;
+        }
+
+        .action-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--teal-blue), var(--yankees-blue));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover .action-icon {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        /* Input Form */
+        .form-control-lg {
+            height: 60px;
+            font-size: 1.05rem;
+        }
+
+        .input-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .input-range {
+            font-weight: 600;
+            color: var(--yankees-blue);
+        }
+
+        .range-slider {
+            margin-top: 0.5rem;
+        }
+
+        .range-slider input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: var(--columbia-blue);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .range-slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--teal-blue);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .range-slider input[type="range"]::-webkit-slider-thumb:hover {
+            background: var(--yankees-blue);
+            transform: scale(1.2);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-secondary {
+            background: var(--pewter-blue);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: var(--teal-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        /* History Table */
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .history-filters {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 0.5rem;
+        }
+
+        .table thead th {
+            padding: 1rem;
+            color: var(--yankees-blue);
+            font-weight: 600;
+            border: none;
+            background: var(--columbia-blue);
+            text-align: left;
+        }
+
+        .table thead th:first-child {
+            border-radius: 10px 0 0 10px;
+        }
+
+        .table thead th:last-child {
+            border-radius: 0 10px 10px 0;
+        }
+
+        .table tbody tr {
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .table tbody tr:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .table tbody td {
+            padding: 1.2rem 1rem;
+            vertical-align: middle;
+            border: none;
+        }
+
+        .table tbody tr td:first-child {
+            border-radius: 10px 0 0 10px;
+        }
+
+        .table tbody tr td:last-child {
+            border-radius: 0 10px 10px 0;
+        }
+
+        .btn-icon {
+            background: var(--columbia-blue);
+            border: none;
+            color: var(--teal-blue);
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 0.2rem;
+        }
+
+        .btn-icon:hover {
+            background: var(--teal-blue);
+            color: white;
+            transform: scale(1.15);
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .pagination-info {
+            color: var(--teal-blue);
+        }
+
+        /* Feedback */
+        .rating-stars {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .rating-stars i {
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .rating-stars i:hover,
+        .rating-stars i.active {
+            color: #FFD700;
+            transform: scale(1.2);
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--columbia-blue);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            color: var(--teal-blue);
+            margin-top: 5px;
+        }
+
+        .info-item strong {
+            display: block;
+            color: var(--yankees-blue);
+            margin-bottom: 0.3rem;
+        }
+
+        .info-item p {
+            margin: 0;
+            color: var(--teal-blue);
+            font-size: 0.9rem;
+        }
+
+        .stat-item-small {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--columbia-blue);
+            border-radius: 12px;
+            margin-bottom: 0.8rem;
+        }
+
+        .stat-item-small span {
+            color: var(--teal-blue);
+            font-weight: 500;
+        }
+
+        .stat-item-small strong {
+            color: var(--yankees-blue);
+            font-size: 1.3rem;
+        }
+
+        /* Profile */
+        .profile-avatar-section {
+            padding: 2rem 0;
+        }
+
+        .profile-avatar-large {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--columbia-blue);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-badges {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .profile-badges .badge {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--columbia-blue);
+        }
+
+        .profile-stat-item {
+            text-align: center;
+        }
+
+        .profile-stat-item h3 {
+            color: var(--yankees-blue);
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .profile-stat-item p {
+            color: var(--teal-blue);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .nav-tabs {
+            border-bottom: 2px solid var(--columbia-blue);
+        }
+
+        .nav-tabs .nav-link {
+            color: var(--teal-blue);
+            border: none;
+            padding: 1rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs .nav-link:hover {
+            color: var(--yankees-blue);
+        }
+
+        .nav-tabs .nav-link.active {
+            color: var(--yankees-blue);
+            background: none;
+            border-bottom: 3px solid var(--teal-blue);
+            font-weight: 600;
+        }
+
+        .settings-group {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--columbia-blue);
+        }
+
+        .settings-group:last-child {
+            border-bottom: none;
+        }
+
+        .settings-group h5 {
+            color: var(--yankees-blue);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--columbia-blue);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .setting-item strong {
+            display: block;
+            color: var(--yankees-blue);
+            margin-bottom: 0.3rem;
+        }
+
+        .setting-item p {
+            margin: 0;
+            color: var(--teal-blue);
+            font-size: 0.9rem;
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 30px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--teal-blue);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .result-modal,
+        .detail-modal {
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: zoomIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--columbia-blue);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--yankees-blue);
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--teal-blue);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .result-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            animation: bounceIn 0.6s ease;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .result-title {
+            text-align: center;
+            color: var(--yankees-blue);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-data {
+            background: var(--columbia-blue);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+        }
+
+        .result-data-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid white;
+        }
+
+        .result-data-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-data-item strong {
+            color: var(--yankees-blue);
+        }
+
+        .result-data-item span {
+            color: var(--teal-blue);
+            font-weight: 600;
+        }
+
+        .result-status {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 1.5rem 0;
+        }
+
+        .recommendations {
+            background: #fff3cd;
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid #ff9f43;
+        }
+
+        .recommendations h5 {
+            color: #856404;
+            margin-bottom: 1rem;
+        }
+
+        .recommendations ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .recommendations li {
+            color: #856404;
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .top-bar {
+                padding: 1rem;
+            }
+            
+            .top-bar-left h2 {
+                font-size: 1.3rem;
+            }
+            
+            .user-info {
+                display: none;
+            }
+            
+            .welcome-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .welcome-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .stat-info h3 {
+                font-size: 1.8rem;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .login-box {
+                padding: 2rem;
+            }
+            
+            .content-area {
+                padding: 1rem;
+            }
+            
+            .card-box {
+                padding: 1.5rem;
+            }
+            
+            .table thead {
+                display: none;
+            }
+            
+            .table tbody tr {
+                display: block;
+                margin-bottom: 1rem;
+                border-radius: 10px;
+            }
+            
+            .table tbody td {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.8rem;
+                border-bottom: 1px solid var(--columbia-blue);
+            }
+            
+            .table tbody td:before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: var(--yankees-blue);
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--columbia-blue);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--teal-blue);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--yankees-blue);
+        }
