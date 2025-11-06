@@ -1674,3 +1674,316 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--yankees-blue);
         }
+
+/* Tambahkan style berikut ke file style.css yang sudah ada */
+
+/* Role Selection Styles */
+.role-selection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.role-option {
+    padding: 1.5rem;
+    border: 2px solid var(--columbia-blue);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.role-option:hover {
+    border-color: var(--teal-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(62, 105, 133, 0.2);
+}
+
+.role-option.active {
+    border-color: var(--teal-blue);
+    background: linear-gradient(135deg, rgba(62, 105, 133, 0.1), rgba(13, 39, 61, 0.05));
+    box-shadow: 0 5px 15px rgba(62, 105, 133, 0.2);
+}
+
+.role-option i {
+    font-size: 2rem;
+    color: var(--teal-blue);
+}
+
+.role-option span {
+    font-weight: 600;
+    color: var(--yankees-blue);
+    font-size: 0.95rem;
+}
+
+/* Fix input alignment - make text start from left */
+.form-control {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    text-align: left;
+}
+
+/* Modal Result Popup */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.result-modal {
+    background: white;
+    padding: 3rem;
+    border-radius: 25px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: zoomIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: var(--columbia-blue);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--yankees-blue);
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: var(--teal-blue);
+    color: white;
+    transform: rotate(90deg);
+}
+
+.result-icon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    animation: bounceIn 0.6s ease;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.result-title {
+    text-align: center;
+    color: var(--yankees-blue);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.result-data {
+    background: var(--columbia-blue);
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin: 1.5rem 0;
+}
+
+.result-data-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid white;
+}
+
+.result-data-item:last-child {
+    border-bottom: none;
+}
+
+.result-data-item strong {
+    color: var(--yankees-blue);
+}
+
+.result-data-item span {
+    color: var(--teal-blue);
+    font-weight: 600;
+}
+
+.result-status {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1.5rem 0;
+}
+
+.warnings {
+    background: #fff3cd;
+    padding: 1.5rem;
+    border-radius: 15px;
+    border-left: 4px solid #ff9f43;
+    margin-bottom: 1rem;
+}
+
+.warnings h5 {
+    color: #856404;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.warnings ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.warnings li {
+    color: #856404;
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Dynamic stat card colors based on values */
+.stat-progress.warning .progress-bar {
+    background: linear-gradient(90deg, #ff9f43, #f76b1c);
+}
+
+.stat-progress.danger .progress-bar {
+    background: linear-gradient(90deg, #ff4444, #cc0000);
+}
+
+/* Password validation */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.text-danger {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Sidebar Divider */
+.sidebar-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 1rem 0;
+}
+
+/* Logout Icon */
+.logout-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #ff4444, #cc0000);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3.5rem;
+    animation: bounceIn 0.6s ease;
+}
+
+.logout-actions {
+    margin-top: 2rem;
+}
+
+.logout-actions button {
+    min-width: 150px;
+}
+
+/* Sidebar close overlay for desktop */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+    cursor: pointer;
+}
+
+.sidebar-overlay.show {
+    display: block;
+}
+
+/* Desktop sidebar behavior */
+@media (min-width: 993px) {
+    .sidebar {
+        transform: translateX(0);
+    }
+    
+    .sidebar.collapsed {
+        transform: translateX(-280px);
+    }
+    
+    .main-content {
+        transition: margin-left 0.3s ease;
+    }
+    
+    .main-content.expanded {
+        margin-left: 0;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1100;
+    }
+    
+    .mobile-menu-toggle.shifted {
+        left: 300px;
+    }
+}
